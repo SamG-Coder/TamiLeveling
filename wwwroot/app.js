@@ -12,6 +12,7 @@ function deviceAura(){const n=navigator;return hash([n.hardwareConcurrency||2,n.
 function save(){localStorage.setItem('nestbound-v2-save',JSON.stringify(state))}function toast(text){document.body.dataset.notice=text;clearTimeout(toast.timer);toast.timer=setTimeout(()=>delete document.body.dataset.notice,1500)}function setSpeech(text){$('#speech').textContent=text}
 function update(){
   $('#questCount').textContent=`${Math.min(state.taps,7)}/7`;$('#questProgress').style.width=`${Math.min(state.taps/7*100,100)}%`;$('#playerLevel').textContent=state.level;$('#hungerBar').style.width=state.hunger+'%';$('#powerBar').style.width=state.power+'%';$('#restBar').style.width=state.rest+'%';$('#stepCount').textContent=state.steps;$('#crack').parentElement.classList.toggle('cracked',state.taps>=4);
+  document.body.dataset.hatched=state.taps>=7?'true':'false';
   if(state.taps>=7){state.hatched=true;$('#questText').textContent='FIRST GATE READY';$('#screenRank').textContent='RANK D';setSpeech('KIBI IS AWAKE!')}
 }
 seed=deviceAura();$('#seedLabel').textContent=`SEED ${seed.slice(0,4)}-${seed.slice(4)} · ${navigator.hardwareConcurrency||2}-CORE`;$('#pairCode').textContent=`${seed.slice(0,4)} ${seed.slice(4)}`;document.body.dataset.mode=modes[0];
@@ -19,7 +20,7 @@ function warm(){if(state.taps>=7){sfx('warm');toast('KIBI BOUNCED!');document.bo
 $('#eggButton').onclick=warm;
 function act(mode){document.body.dataset.action=mode;const duration=mode==='GATE'?4600:(mode==='FEED'||mode==='REST'||mode==='TRAIN'?2400:800);setTimeout(()=>delete document.body.dataset.action,duration);if(mode==='WARM')warm();if(mode==='FEED'){state.hunger=Math.min(100,state.hunger+14);toast('BYTE-BERRY +14')}if(mode==='TRAIN'){state.power=Math.min(100,state.power+9);state.rest=Math.max(0,state.rest-7);toast('SHADOW DRILL +9')}if(mode==='REST'){state.rest=Math.min(100,state.rest+18);toast('DREAM CHARGE +18')}if(mode==='GATE'){document.body.dataset.room='GATE';setTimeout(()=>delete document.body.dataset.room,4600);state.power=Math.min(100,state.power+5);state.rest=Math.max(0,state.rest-8);toast('ENTERING E-GATE')}if(mode==='STEPS')$('#shakeButton').click();if(mode==='LINK')$('#pairDialog').showModal();save();update()}
 document.querySelectorAll('.stat').forEach(b=>b.onclick=()=>act(b.dataset.action.toUpperCase()));
-function selectMode(delta){modeIndex=(modeIndex+delta+modes.length)%modes.length;document.body.dataset.mode=modes[modeIndex];toast(`< ${modes[modeIndex]} >`);navigator.vibrate?.(10)}
+function selectMode(delta){if(!state.hatched){sfx('nav');toast('EGG IS DORMANT');navigator.vibrate?.(8);return}modeIndex=(modeIndex+delta+modes.length)%modes.length;document.body.dataset.mode=modes[modeIndex];toast(`< ${modes[modeIndex]} >`);navigator.vibrate?.(10)}
 $('#leftButton').onclick=()=>selectMode(-1);$('#rightButton').onclick=()=>selectMode(1);$('#actionButton').onclick=()=>act(modes[modeIndex]);$('#pairButton').onclick=()=>$('#pairDialog').showModal();$('#soundButton').onclick=()=>toast('BEEP-BEEP!');
 
 function qrPayload(pass,other=''){const stamp=Math.floor(Date.now()/60000).toString(36);return JSON.stringify({game:'NESTBOUND',v:1,pass,seed,other,proof:hash(`${seed}|${other}|${pass}|${stamp}`)})}
