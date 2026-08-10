@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#8e5ab8"><meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Pocket Ascendant</title><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css?v=8"><link rel="stylesheet" href="/depth.css?v=8"><link rel="stylesheet" href="/three.css?v=8"><link rel="stylesheet" href="/device-ui.css?v=8">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"}}</script>
+</head>
+<body>
+  <main class="stage three-stage">
+    <canvas id="threeCanvas" aria-label="Interactive 3D Nestbound device"></canvas>
+    <div class="motion-panel"><button id="shakeButton"><span>⌁</span><b>ENABLE SHAKE STEPS</b></button><div><strong id="stepCount">0</strong><small>STEPS</small></div></div>
+    <div class="three-help"><b>LEFT / RIGHT</b> SELECT · <b>CENTER</b> ACTION</div>
+    <section class="toy" aria-label="Nestbound virtual pet">
+      <div class="chain"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="toy-glints">✦　·　✧</div>
+      <header class="toy-brand"><span>NEST</span><b>BOUND</b><small>POCKET FAMILIAR</small></header>
+
+      <div class="screen-bezel">
+        <div class="screen" id="screen">
+          <div class="scanlines"></div>
+          <header class="lcd-top">
+            <span id="screenRank">RANK E</span>
+            <div class="lcd-icons"><button data-action="feed" aria-label="Feed">◆</button><button data-action="train" aria-label="Train">⚔</button><button data-action="rest" aria-label="Rest">Z</button><button id="pairButton" aria-label="Pair">⌁</button></div>
+            <span>LV.<b id="playerLevel">1</b></span>
+          </header>
+
+          <section class="lcd-scene" id="nestScene">
+            <div class="pixel-cloud c1">▰▰</div><div class="pixel-cloud c2">▰</div>
+            <div class="lcd-message" id="speech">TAP TO WARM!</div>
+            <button class="egg-wrap" id="eggButton" aria-label="Warm the egg">
+              <span class="heat heat-one">⌁</span><span class="heat heat-two">⌁</span>
+              <span class="pixel-egg" id="egg"><i class="spot s1"></i><i class="spot s2"></i><i class="spot s3"></i><em id="crack"></em></span>
+              <span class="pixel-shadow"></span>
+            </button>
+            <div class="ground">· · · · · · · · · · · · ·</div>
+          </section>
+
+          <footer class="lcd-bottom">
+            <div><span>HUNGER</span><i><b id="hungerBar"></b></i></div>
+            <div><span>POWER</span><i><b id="powerBar"></b></i></div>
+            <div><span>REST</span><i><b id="restBar"></b></i></div>
+          </footer>
+        </div>
+        <span class="bezel-label">AWAKENED SYSTEM // <b id="seedLabel">SCANNING…</b></span>
+      </div>
+
+      <div class="quest-strip"><span>QUEST</span><b id="questText">WARM EGG × 7</b><i><em id="questProgress"></em></i><strong id="questCount">0/7</strong></div>
+
+      <div class="controls" aria-label="Toy controls">
+        <div><button class="round-button" id="leftButton">◀</button><span>SELECT</span></div>
+        <div class="middle"><button class="round-button" id="actionButton">●</button><span>ACTION</span></div>
+        <div><button class="round-button" id="rightButton">▶</button><span>BACK</span></div>
+      </div>
+      <div class="speaker"><i></i><i></i><i></i><i></i><i></i></div>
+      <button class="tiny-sound" id="soundButton">♪</button>
+    </section>
+
+    <p class="hint">A pocket-sized hunter is waiting inside.</p>
+  </main>
+
+  <dialog id="pairDialog"><form method="dialog" class="sheet"><div class="sheet-title"><span>▦</span><div><small>3-PASS RITUAL</small><h2>BREED / LINK</h2></div><button class="close" value="cancel">×</button></div><p id="qrInstruction">Pass 1: show your lineage offer to another Hatcher.</p><div class="qr-stage"><div id="qrCode"></div><span id="qrPassLabel">PASS 1 · OFFER</span></div><div class="pair-code"><small>YOUR EGG SEED</small><b id="pairCode">···· ····</b></div><button type="button" class="scan-button" id="createPassButton">CREATE PASS 1</button><label class="demo-button file-button">SCAN NEXT PASS<input id="qrFile" type="file" accept="image/*" capture="environment"></label><button type="button" class="demo-button" id="demoPairButton">SIMULATE FULL RITUAL</button><p class="compat-note" id="compatNote">Offer → Response → Final Egg. No account or network required.</p></form></dialog>
+  <dialog id="infoDialog"><form method="dialog" class="sheet"><div class="sheet-title"><span id="infoIcon">◆</span><div><small>SYSTEM LOG</small><h2 id="infoTitle">STATUS</h2></div><button class="close" value="cancel">×</button></div><p id="infoText"></p><button class="scan-button" value="ok">OK</button></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js" defer></script><script src="/app.js?v=20" defer></script><script type="module" src="/three-scene.js?v=20"></script>
+</body></html>

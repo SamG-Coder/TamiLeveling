@@ -1,0 +1,14 @@
+*{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+.stage{perspective:1300px;perspective-origin:50% 42%}
+.toy{transform-style:preserve-3d;transform:rotateX(var(--tilt-x,2deg)) rotateY(var(--tilt-y,-3deg));transition:transform .16s ease-out;box-shadow:inset 9px 12px 10px #f4c8fa80,inset -13px -16px 14px #512a6d80,0 3px 0 #8f5aaa,0 8px 0 #75438e,0 14px 0 #5d376d,0 20px 0 #482b52,14px 30px 35px #56335c66}
+.chain{transform:translateZ(-12px) rotate(-13deg);filter:drop-shadow(4px 7px 2px #503b2344)}.chain i{box-shadow:inset 3px 2px 0 #ffe28d,inset -3px -3px 0 #7d571d,2px 4px 0 #644a26}
+.toy-brand{transform:translateZ(18px);text-shadow:0 2px 0 #fff3,0 5px 0 #63377a,0 8px 8px #4b285d88}.toy-glints{transform:translateZ(12px)}
+.screen-bezel{transform:translateZ(22px);background:linear-gradient(145deg,#fff0fb,#d7aed8 45%,#a878ad);border-width:5px;box-shadow:inset 7px 7px 2px #fff9,inset -8px -8px 3px #8a628f,0 4px 0 #8d6498,0 9px 0 #603873,0 13px 14px #42284f77}
+.screen{transform:translateZ(3px);border-width:8px;border-color:#39403d;box-shadow:inset 9px 12px 18px #40533e80,inset -5px -7px 12px #d9edb366,0 0 0 3px #705d70,0 4px 0 #302d33}.screen:after{content:"";pointer-events:none;position:absolute;inset:0;z-index:8;background:linear-gradient(125deg,#fff5 0 7%,transparent 19% 70%,#263a2b12 90%);mix-blend-mode:screen}
+.quest-strip{transform:translateZ(15px);box-shadow:inset 3px 4px 2px #ffe8f3,inset -4px -5px 2px #bd6f96,0 4px 0 #8c4d74,0 8px 0 #63377a,0 11px 10px #4d2b5d55}
+.controls{transform-style:preserve-3d;transform:translateZ(18px)}.controls>div{transform-style:preserve-3d}.controls .middle{transform:translateY(11px) translateZ(5px)}
+.round-button{transform:translateZ(10px);box-shadow:inset 5px 5px 3px #ffe0ebaa,inset -6px -7px 4px #8e355e88,0 4px 0 #a84770,0 9px 0 #733c59,0 13px 10px #47263766}.round-button:active{transform:translateY(8px) translateZ(2px);box-shadow:inset 4px 5px 5px #8f345c88,0 2px 0 #733c59}
+.speaker{transform:translateZ(8px) rotate(-13deg)}.tiny-sound{transform:translateZ(8px)}
+.toy:before,.toy:after{box-shadow:inset 4px 3px #ffc2da,inset -5px -4px #973e68,0 7px 0 #65334f}
+@media(min-width:700px){.toy,.toy:hover{transform:rotateX(var(--tilt-x,2deg)) rotateY(var(--tilt-y,-3deg));transition:transform .16s ease-out}}
+@media(prefers-reduced-motion:reduce){.toy{transition:none}}
